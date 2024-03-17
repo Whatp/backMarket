@@ -5,12 +5,12 @@ import com.market.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
     private UserMapper userMapper;
-
-
 
     public Integer save(User user) {
         if(user.getId() == null) {
@@ -19,5 +19,13 @@ public class UserService {
         else {
             return userMapper.update(user);
         }
+    }
+
+    public List<User> list() {
+        return userMapper.findAll();
+    }
+
+    public void delete(Integer id) {
+        userMapper.deleteById(id);
     }
 }
