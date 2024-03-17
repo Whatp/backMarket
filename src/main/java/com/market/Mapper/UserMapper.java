@@ -18,4 +18,10 @@ public interface UserMapper {
 
     @Delete("delete from market.user where id = #{id}")
     Integer deleteById(Integer id);
+
+    @Select("select * from market.user where username like #{username} limit #{pageNum}, #{pageSize}")
+    List<User> selectPage(Integer pageNum, Integer pageSize, String username);
+
+    @Select("select count(*) from market.user where username like concat('%', #{username}, '%') ")
+    Integer selectTotal(String username);
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
+
+
+
     public Integer save(User user) {
         if(user.getId() == null) {
             return userMapper.insert(user);
