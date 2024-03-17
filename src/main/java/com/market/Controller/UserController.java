@@ -20,7 +20,7 @@ public class UserController {
     private UserMapper userMapper;
 
 //    查询所有数据
-    @GetMapping
+    @GetMapping("/users")
     public List<User> index() {
         List<User> all= userMapper.findAll();
         return all;
