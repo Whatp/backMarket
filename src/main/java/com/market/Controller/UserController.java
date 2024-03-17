@@ -3,7 +3,6 @@ package com.market.Controller;
 import com.market.Mapper.UserMapper;
 import com.market.Service.UserService;
 import com.market.pojo.User;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class UserController {
     private UserMapper userMapper;
 
 //    查询所有数据
-    @GetMapping
+    @GetMapping("/users")
     public List<User> index() {
         List<User> all= userMapper.findAll();
         return all;
