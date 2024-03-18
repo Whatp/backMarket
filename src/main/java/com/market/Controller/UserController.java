@@ -12,16 +12,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin
-@RestController
 @Slf4j
-@RequestMapping("/user")
+@RequestMapping("/users")
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
 
+//    @GetMapping("/hello")
+//    public String hello() {
+//        return "hello";
+//    }
 //    查询所有数据
     @GetMapping
     public Result list() {
@@ -37,11 +40,7 @@ public class UserController {
         return Result.success();
     }
 
-    @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id) {
-        userService.delete(id);
-        return Result.success();
-    }
+
 
     // 分页查询
     //  接口路径：/user/page?pageNum=1&pageSize=10

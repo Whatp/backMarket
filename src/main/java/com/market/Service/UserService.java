@@ -25,7 +25,5 @@ public class UserService {
         return userMapper.findAll();
     }
 
-    public void delete(Integer id) {
-        userMapper.deleteById(id);
-    }
+
 }
