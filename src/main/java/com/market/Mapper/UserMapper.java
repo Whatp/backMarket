@@ -25,4 +25,6 @@ public interface UserMapper {
 
     @Select("select count(*) from market.user where name like concat('%', #{name}, '%') ")
     Integer selectTotal(String name);
+
+    void deleteByIds(List<Integer> ids);
 }

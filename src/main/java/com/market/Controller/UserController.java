@@ -21,11 +21,10 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-//    @GetMapping("/hello")
-//    public String hello() {
-//        return "hello";
-//    }
-//    查询所有数据
+    /**
+     * 查询所有数据
+     * @return
+     */
     @GetMapping
     public Result list() {
         log.info("查看全部员工");
@@ -45,11 +44,32 @@ public class UserController {
         return Result.success();
     }
 
-    // 分页查询
-    //  接口路径：/user/page?pageNum=1&pageSize=10
-    // @RequestParam接受
-//    limit第一个参数 = (pageNum - 1) * pageSize
-    // pageSize
+    /**
+     * 批量删除方法一：
+     * @PostMapping("/del/batch")
+     * public Result deleteBatch(@RequestBody List<Integer> ids> {
+     *     userService.removeByIds(ids);
+     *     return Result.success();
+     * }
+     * 批量删除方法二：
+     */
+    @PostMapping("/del/batch")
+    public Result deleteBatch(@RequestBody List<Integer> ids) {
+        userService.deleteIds(ids);
+        return Result.success();
+    }
+
+
+    /**
+     * 分页查询
+     * 接口路径：/user/page?pageNum=1&pageSize=10
+     * @RequestParam接受
+     * limit第一个参数 = (pageNum - 1) * pageSize
+     * @param pageNum
+     * @param pageSize
+     * @param name
+     * @return
+     */
     @GetMapping("/page")
     public Map<String, Object> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,

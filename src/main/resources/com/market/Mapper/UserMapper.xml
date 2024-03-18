@@ -25,4 +25,10 @@
             id = #{id}
         </where>
     </update>
+    <delete id="deleteByIds">
+        delete from market.user where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

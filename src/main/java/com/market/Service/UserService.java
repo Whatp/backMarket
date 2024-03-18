@@ -29,4 +29,8 @@ public class UserService {
     public void delete(Integer id) {
         userMapper.deleteById(id);
     }
+
+    public void deleteIds(List<Integer> ids) {
+        userMapper.deleteByIds(ids);
+    }
 }
