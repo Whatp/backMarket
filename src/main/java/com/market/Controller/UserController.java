@@ -33,17 +33,15 @@ public class UserController {
         return Result.success(userList);
     }
 
-
-
     @PostMapping
     public Result add(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
-
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
-        userMapper.deleteById(id);
+        log.info("根据id删除部门");
+        userService.delete(id);
         return Result.success();
     }
 
