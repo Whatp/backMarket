@@ -15,6 +15,5 @@ public class User {
     private String gender;
     private String phone;
     private String address;
-    private String avatar;
 
 }

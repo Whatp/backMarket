@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin
 @Slf4j
-@RequestMapping("/users")
+@RequestMapping("/user")
 @RestController
 public class UserController {
     @Autowired
@@ -53,11 +53,11 @@ public class UserController {
     @GetMapping("/page")
     public Map<String, Object> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
-                                        @RequestParam String username) {
+                                        @RequestParam String name) {
         pageNum = (pageNum - 1) * pageSize;
-        username = "%" + username + "%";
-        List<User> data = userMapper.selectPage(pageNum, pageSize, username);
-        Integer total = userMapper.selectTotal(username);
+        name = "%" + name + "%";
+        List<User> data = userMapper.selectPage(pageNum, pageSize, name);
+        Integer total = userMapper.selectTotal(name);
         Map<String, Object> res = new HashMap<>();
         res.put("data", data);
         res.put("total", total);
