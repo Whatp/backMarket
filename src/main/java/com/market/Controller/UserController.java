@@ -15,6 +15,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -22,7 +23,7 @@ public class UserController {
     private UserMapper userMapper;
 
 //    查询所有数据
-    @GetMapping("/users")
+    @GetMapping
     public Result list() {
         log.info("查看全部员工");
         List<User> userList = userService.list();
@@ -30,13 +31,13 @@ public class UserController {
     }
 
 
-    @PostMapping("/users/user/{id}")
+    @PostMapping
     public Result add(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
 
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         userService.delete(id);
         return Result.success();
@@ -47,7 +48,7 @@ public class UserController {
     // @RequestParam接受
 //    limit第一个参数 = (pageNum - 1) * pageSize
     // pageSize
-    @GetMapping("/users/page")
+    @GetMapping("/page")
     public Map<String, Object> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
                                         @RequestParam String username) {
