@@ -4,6 +4,7 @@ import com.market.Mapper.UserMapper;
 import com.market.Service.UserService;
 import com.market.pojo.Result;
 import com.market.pojo.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
@@ -21,20 +22,21 @@ public class UserController {
     private UserMapper userMapper;
 
 //    查询所有数据
-    @GetMapping
+    @GetMapping("/users")
     public Result list() {
+        log.info("查看全部员工");
         List<User> userList = userService.list();
         return Result.success(userList);
     }
 
 
-    @PostMapping
-    public Result save(@RequestBody User user) {
+    @PostMapping("/users/user/{id}")
+    public Result add(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("users/{id}")
     public Result delete(@PathVariable Integer id) {
         userService.delete(id);
         return Result.success();
@@ -45,7 +47,7 @@ public class UserController {
     // @RequestParam接受
 //    limit第一个参数 = (pageNum - 1) * pageSize
     // pageSize
-    @GetMapping("/page")
+    @GetMapping("/users/page")
     public Map<String, Object> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
                                         @RequestParam String username) {

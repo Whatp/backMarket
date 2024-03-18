@@ -12,7 +12,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public Integer save(User user) {
+    public int save(User user) {
         if(user.getId() == null) {
             return userMapper.insert(user);
         }
