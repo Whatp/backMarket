@@ -34,13 +34,18 @@ public class UserController {
     }
 
 
+
     @PostMapping
     public Result add(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
 
-
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id) {
+        userMapper.deleteById(id);
+        return Result.success();
+    }
 
     // 分页查询
     //  接口路径：/user/page?pageNum=1&pageSize=10

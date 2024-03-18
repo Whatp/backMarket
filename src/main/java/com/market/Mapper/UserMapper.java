@@ -17,7 +17,8 @@ public interface UserMapper {
 
     int update(User user);
 
-
+    @Delete("delete from market.user where id = #{id}")
+    void deleteById(Integer id);
 
     @Select("select * from market.user where username like #{username} limit #{pageNum}, #{pageSize}")
     List<User> selectPage(Integer pageNum, Integer pageSize, String username);
