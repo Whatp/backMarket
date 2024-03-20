@@ -27,4 +27,6 @@ public interface UserMapper {
     Integer selectTotal(String name);
 
     void deleteByIds(List<Integer> ids);
+    @Select("select * from market.user where username=#{username} and password=#{password}")
+    User selectByUsername(User user);
 }
