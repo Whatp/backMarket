@@ -1,6 +1,7 @@
 package com.market.Service;
 
 import com.market.Mapper.UserMapper;
+import com.market.common.JwtUtils;
 import com.market.exception.ServiceException;
 import com.market.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,11 @@ public class UserService {
     private UserMapper userMapper;
 
     public int save(User user) {
+//        设置一个默认密码
+        if(user.getPassword()==null) {
+            user.setPassword("123456");
+        }
+
         if(user.getId() == null) {
             return userMapper.insert(user);
         }
@@ -22,11 +28,24 @@ public class UserService {
         }
     }
 
+    /**
+     * 个人信息的更新
+     * @param user
+     * @return
+     */
+    public int save1(User user) {
+//        设置一个默认密码
+        return userMapper.update(user);
+    }
+
     public List<User> list() {
         return userMapper.findAll();
     }
 
+    public List<User> findByUsername(String username) {
 
+        return userMapper.findByUsername(username);
+    }
     public void delete(Integer id) {
         userMapper.deleteById(id);
     }
@@ -53,10 +72,17 @@ public class UserService {
         if (dbUser == null) {
             // 抛出一个自定义的异常
             throw new ServiceException("用户名或密码错误");
+
         }
         if (!user.getPassword().equals(dbUser.getPassword())) {
             throw new ServiceException("用户名或密码错误");
         }
+        String token = JwtUtils.genToken(dbUser.getId().toString(),dbUser.getPassword());
+        dbUser.setToken(token);
         return dbUser;
     }
+
+
+
+
 }

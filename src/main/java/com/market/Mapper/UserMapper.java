@@ -17,6 +17,8 @@ public interface UserMapper {
 
     int update(User user);
 
+
+
     @Delete("delete from market.user where id=#{id}")
     void deleteById(Integer id);
 
@@ -29,4 +31,9 @@ public interface UserMapper {
     void deleteByIds(List<Integer> ids);
     @Select("select * from market.user where username=#{username} and password=#{password}")
     User selectByUsername(User user);
+
+    @Select("select * from market.user where username=#{username}")
+    List<User> findByUsername(String username);
+    @Select("select * from market.user where id = #{id}")
+    User selectById(String userId);
 }

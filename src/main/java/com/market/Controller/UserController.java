@@ -1,8 +1,9 @@
 package com.market.Controller;
 
+
 import com.market.Mapper.UserMapper;
 import com.market.Service.UserService;
-import com.market.pojo.Result;
+import com.market.common.Result;
 import com.market.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,34 @@ public class UserController {
         return Result.success(userList);
     }
 
+
+    /**
+     * 查看单个人user的信息并返回给前端
+     */
+    @GetMapping("/username/{username}")
+    public Result findByUsername(@PathVariable String username) {
+        List<User> userList = userService.findByUsername(username);
+        return Result.success(userList);
+    }
+
     @PostMapping
     public Result add(@RequestBody User user) {
         userService.save(user);
         return Result.success();
     }
+
+    /**
+     * 个人信息的更新
+     * @param user
+     * @return
+     */
+    @PostMapping("/update")
+    public Result add1(@RequestBody User user) {
+        userService.save1(user);
+        return Result.success();
+    }
+
+
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         log.info("根据id删除部门");
@@ -83,4 +107,10 @@ public class UserController {
         res.put("total", total);
         return res;
     }
+//    @GetMapping("/username/{username}")
+//    public Result findByUsername(@PathVariable String username) {
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("username", username);
+//        return Result.success(userService.getOne(queryWrapper));
+//    }
 }
