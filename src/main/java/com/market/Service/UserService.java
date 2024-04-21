@@ -19,7 +19,6 @@ public class UserService {
         if(user.getPassword()==null) {
             user.setPassword("123456");
         }
-
         if(user.getId() == null) {
             return userMapper.insert(user);
         }
@@ -60,8 +59,12 @@ public class UserService {
             // 抛出一个自定义的异常
             throw new ServiceException("用户名已存在");
         }
-//        user.setUsername(user.getUsername());
-//        user.setPassword(user.getPassword());
+        if (user.getName() == null) {
+            user.setName(user.getUsername());
+        }
+        if (user.getRole() == null) {
+            user.setRole("用户");
+        }
         userMapper.insert(user);
         return user;
     }

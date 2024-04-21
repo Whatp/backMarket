@@ -11,12 +11,11 @@ public interface UserMapper {
     @Select("select * from market.user")
     List<User> findAll();
 
-    @Insert("insert into market.user (username, password, name, gender, phone, address) " +
-            "values (#{username}, #{password}, #{name}, #{gender}, #{phone}, #{address})")
+    @Insert("insert into market.user (username, password, name, gender, phone, address, role) " +
+            "values (#{username}, #{password}, #{name}, #{gender}, #{phone}, #{address}, #{role})")
     int insert(User user);
 
     int update(User user);
-
 
 
     @Delete("delete from market.user where id=#{id}")
